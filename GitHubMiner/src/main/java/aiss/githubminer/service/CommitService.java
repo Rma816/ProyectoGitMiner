@@ -1,30 +1,25 @@
 package aiss.githubminer.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CommitService {
 
-//    @Autowired
-//    private CommitRepository commitRepository;
-//
-//    public List<Commit> getAllCommits() {
-//        return commitRepository.findAll();
-//    }
-//
-//    public Optional<Commit> getCommitById(String id) {
-//        return commitRepository.findById(id);
-//    }
-//
-//    public List<Commit> saveCommits(List<Commit> commits) {
-//        return commitRepository.saveAll(commits);
-//    }
-//
-//    public Commit saveCommit(Commit commit) {
-//        return commitRepository.save(commit);
-//    }
-//
-//    public void deleteCommitById(String id) {
-//        commitRepository.deleteById(id);
-//    }
+    @Autowired
+    RestTemplate restTemplate;
+
+    public List<Commit> getAllCommits(String owner, string repo) {
+        List<Commit> commits = null;
+        String uri = "https://api.github.com/repos/" + owner + "/" + repo + "/commits";
+        Commit[] arrayCommits = restTemplate.getForObject(uri, Commit[].class);
+        return Arrays.asList(arrayCommits);
+    }
+
+    public Commit getCommitByRef(String author, string repo, string ref) {
+        Commit commit = null;
+        String uri = "https://api.github.com/repos/" + owner + "/" + repo + "/commits/" + ref;
+        commit = restTemplate.getForObject(uri, Commit.class);
+        return commit;
+    }
 }
