@@ -1,10 +1,14 @@
 package aiss.githubminer.model.commitD;
 
+import javax.annotation.Generated;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CommitParent {
+public class CommitTree {
 
     @JsonProperty("url")
     private String url;
@@ -34,7 +38,7 @@ public class CommitParent {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(CommitParent.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(CommitTree.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("url");
         sb.append('=');
         sb.append(((this.url == null)?"<null>":this.url));

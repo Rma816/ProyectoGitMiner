@@ -15,6 +15,8 @@ public class CommitAuthor {
     @JsonProperty("date")
     private String date;
 
+    // Getters and setters
+
     @JsonProperty("name")
     public String getName() {
         return name;
