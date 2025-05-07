@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IssueGHM {
 
     @JsonProperty("id")
-    private Integer id;
+    private String id;
     @JsonProperty("node_id")
     private String nodeId;
     @JsonProperty("url")
@@ -66,12 +66,12 @@ public class IssueGHM {
     private String authorAssociation;
 
     @JsonProperty("id")
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -276,8 +276,8 @@ public class IssueGHM {
     }
 
     @JsonProperty("closed_at")
-    public Object getClosedAt() {
-        return closedAt;
+    public String getClosedAt() {
+        return (String) closedAt;
     }
 
     @JsonProperty("closed_at")
