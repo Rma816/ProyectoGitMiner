@@ -5,7 +5,6 @@ import aiss.bitbucketminer.model.containers.BitBucketIssueContainer;
 import aiss.bitbucketminer.model.dependencies.links.Links_Project;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import java.util.List;
 
 import static aiss.bitbucketminer.service.CommitService.getCommitFromUrl;
 import static aiss.bitbucketminer.service.IssueService.getIssuesFromUrl;

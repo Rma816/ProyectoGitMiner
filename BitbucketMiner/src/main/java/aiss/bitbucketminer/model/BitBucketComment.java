@@ -1,11 +1,8 @@
 package aiss.bitbucketminer.model;
 
 import aiss.bitbucketminer.model.dependencies.Content;
-import aiss.bitbucketminer.model.dependencies.links.Links_Project;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 public class BitBucketComment {

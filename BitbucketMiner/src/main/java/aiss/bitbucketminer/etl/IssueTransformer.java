@@ -1,21 +1,11 @@
 package aiss.bitbucketminer.etl;
 
-import aiss.bitbucketminer.model.BitBucketComment;
 import aiss.bitbucketminer.model.BitBucketIssue;
-import aiss.bitbucketminer.service.CommentService;
-import aiss.gitminer.model.Issue;
-import aiss.bitbucketminer.service.CommentService.*;
-import aiss.gitminer.model.User;
+import aiss.bitbucketminer.model.GitMiner.Issue;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static aiss.bitbucketminer.etl.CommentTransformer.transformComment;
 import static aiss.bitbucketminer.etl.UserTransformer.transformUser;
-import static aiss.bitbucketminer.service.CommentService.obtenerCommentDesdeUrl;
 
 public class IssueTransformer {
 

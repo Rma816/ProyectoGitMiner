@@ -1,8 +1,7 @@
 package aiss.bitbucketminer.etl;
 
 import aiss.bitbucketminer.model.BitBucketUser;
-import aiss.gitminer.model.User;
-import jakarta.validation.constraints.NotNull;
+import aiss.bitbucketminer.model.GitMiner.User;
 
 public class UserTransformer {
 

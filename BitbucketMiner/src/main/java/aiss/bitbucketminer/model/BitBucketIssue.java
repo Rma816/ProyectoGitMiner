@@ -1,7 +1,6 @@
 package aiss.bitbucketminer.model;
 
 import aiss.bitbucketminer.model.containers.BitBucketCommentContainer;
-import aiss.bitbucketminer.model.containers.BitBucketCommitContainer;
 import aiss.bitbucketminer.model.dependencies.Content;
 import aiss.bitbucketminer.model.dependencies.links.Links_Issue;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

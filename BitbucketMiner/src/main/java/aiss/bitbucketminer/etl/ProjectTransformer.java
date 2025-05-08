@@ -1,11 +1,7 @@
 package aiss.bitbucketminer.etl;
 
-import aiss.bitbucketminer.model.BitBucketCommit;
-import aiss.bitbucketminer.model.BitBucketIssue;
 import aiss.bitbucketminer.model.BitBucketProject;
-import aiss.gitminer.model.Commit;
-import aiss.gitminer.model.Issue;
-import aiss.gitminer.model.Project;
+import aiss.bitbucketminer.model.GitMiner.*;
 import java.util.List;
 import java.util.stream.Collectors;
 

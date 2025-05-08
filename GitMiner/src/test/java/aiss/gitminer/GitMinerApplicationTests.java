@@ -1,10 +1,10 @@
-package aiss.proyecto.bitbucketminer;
+package aiss.gitminer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BitbucketMinerApplicationTests {
+class GitMinerApplicationTests {
 
 	@Test
 	void contextLoads() {

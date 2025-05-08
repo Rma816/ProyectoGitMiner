@@ -1,11 +1,11 @@
 package aiss.bitbucketminer.service;
 
 import aiss.bitbucketminer.model.BitBucketProject;
-import aiss.gitminer.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import aiss.bitbucketminer.model.GitMiner.Project;
 
 import static aiss.bitbucketminer.etl.ProjectTransformer.transformProject;
 

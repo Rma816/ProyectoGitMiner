@@ -1,8 +1,7 @@
 package aiss.bitbucketminer.controller;
 
-import aiss.bitbucketminer.model.BitBucketProject;
 import aiss.bitbucketminer.service.ProjectService;
-import aiss.gitminer.model.Project;
+import aiss.bitbucketminer.model.GitMiner.Project;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;

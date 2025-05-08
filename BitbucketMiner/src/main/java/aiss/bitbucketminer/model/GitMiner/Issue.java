@@ -1,9 +1,8 @@
 
-package aiss.gitminer.model;
+package aiss.bitbucketminer.model.GitMiner;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-
 
 import java.util.List;
 
