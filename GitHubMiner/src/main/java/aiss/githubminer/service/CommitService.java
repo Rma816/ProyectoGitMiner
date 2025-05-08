@@ -1,52 +1,25 @@
 package aiss.githubminer.service;
 
-import aiss.githubminer.model.CommitGHM;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import java.net.http.HttpHeaders;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 @Service
 public class CommitService {
 
-    public static List<CommitGHM> getCommits(String commitsUrl) {
-        try {
-            RestTemplate restTemplate = new RestTemplate();
-            CommitGHM[] commits = restTemplate.getForObject(commitsUrl, CommitGHM[].class);
-            return Arrays.asList(commits != null ? commits : new CommitGHM[0]);
-        } catch (Exception e) {
-            System.err.println("Error al obtener commits: " + e.getMessage());
-            return Collections.emptyList();
-        }
+    @Autowired
+    RestTemplate restTemplate;
+
+    public List<Commit> getAllCommits(String owner, string repo) {
+        List<Commit> commits = null;
+        String uri = "https://api.github.com/repos/" + owner + "/" + repo + "/commits";
+        Commit[] arrayCommits = restTemplate.getForObject(uri, Commit[].class);
+        return Arrays.asList(arrayCommits);
     }
 
-//    @Autowired
-//    private CommitRepository commitRepository;
-//
-//    public List<Commit> getAllCommits() {
-//        return commitRepository.findAll();
-//    }
-//
-//    public Optional<Commit> getCommitById(String id) {
-//        return commitRepository.findById(id);
-//    }
-//
-//    public List<Commit> saveCommits(List<Commit> commits) {
-//        return commitRepository.saveAll(commits);
-//    }
-//
-//    public Commit saveCommit(Commit commit) {
-//        return commitRepository.save(commit);
-//    }
-//
-//    public void deleteCommitById(String id) {
-//        commitRepository.deleteById(id);
-//    }
+    public Commit getCommitByRef(String author, string repo, string ref) {
+        Commit commit = null;
+        String uri = "https://api.github.com/repos/" + owner + "/" + repo + "/commits/" + ref;
+        commit = restTemplate.getForObject(uri, Commit.class);
+        return commit;
+    }
 }
