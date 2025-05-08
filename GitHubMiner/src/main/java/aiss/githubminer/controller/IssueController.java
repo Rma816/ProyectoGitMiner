@@ -1,5 +1,6 @@
 package aiss.githubminer.controller;
 
+import aiss.githubminer.model.GitMiner.Issue;
 import aiss.githubminer.service.IssueService;
 import aiss.githubminer.model.IssueGHM;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,12 @@ public class IssueController {
     // GET uri: http://localhost:8082/github/octocat/Hello-World/issues
 
     @GetMapping("/{owner}/{repo}/issues")
-    public ResponseEntity<List<IssueGHM>> getIssues(
+    public ResponseEntity<List<Issue>> getIssues(
             @PathVariable String owner,
             @PathVariable String repo) {
 
         List<IssueGHM> issues = issueService.getIssues(owner, repo);
-        return ResponseEntity.ok(issues);
+        List<Issue> issueList = issueService.mapIssues(issues);
+        return ResponseEntity.ok(issueList);
     }
 }

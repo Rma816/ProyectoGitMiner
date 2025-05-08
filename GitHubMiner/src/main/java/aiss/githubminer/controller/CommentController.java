@@ -1,6 +1,7 @@
 package aiss.githubminer.controller;
 
 import aiss.githubminer.model.CommentGHM;
+import aiss.githubminer.model.GitMiner.Comment;
 import aiss.githubminer.model.ProjectGHM;
 import aiss.githubminer.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,11 @@ public class CommentController {
     // GET uri ej: https://api.github.com/repos/octocat/Hello-World/issues/1/comments
 
     @GetMapping("/{owner}/{repo}/issues/{issueId}/comments")
-    public ResponseEntity<List<CommentGHM>> getComments(@PathVariable String owner,
+    public ResponseEntity<List<Comment>> getCommentsGHM(@PathVariable String owner,
                                                         @PathVariable String repo,
                                                         @PathVariable String issueId) {
         List<CommentGHM> comments = commentService.getAllComments(owner, repo, issueId);
-        return ResponseEntity.ok(comments);
+        List<Comment> commentsList = commentService.mapComments(comments);
+        return ResponseEntity.ok(commentsList);
     }
 }

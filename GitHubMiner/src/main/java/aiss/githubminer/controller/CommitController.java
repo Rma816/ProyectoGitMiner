@@ -1,6 +1,7 @@
 package aiss.githubminer.controller;
 
 import aiss.githubminer.model.CommitGHM;
+import aiss.githubminer.model.GitMiner.Commit;
 import aiss.githubminer.service.CommitService;
 import aiss.githubminer.service.IssueService;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +21,14 @@ public class CommitController {
     @Autowired
     private CommitService commitService;
 
-    // GET uri: http://localhost:8082/github/octocat/Hello-World/commits
+    // GET uri ej: http://localhost:8082/github/octocat/Hello-World/commits
 
     @GetMapping("/{owner}/{repo}/commits")
-    public ResponseEntity<List<CommitGHM>> getAllCommitsGHM(@PathVariable String owner,
+    public ResponseEntity<List<Commit>> getAllCommitsGHM(@PathVariable String owner,
                                                             @PathVariable String repo) {
         List<CommitGHM> commits = commitService.getAllCommits(owner, repo);
-        return ResponseEntity.ok(commits);
+        List<Commit> commitList = commitService.mapCommits(commits);
+        return ResponseEntity.ok(commitList);
     }
 }
 

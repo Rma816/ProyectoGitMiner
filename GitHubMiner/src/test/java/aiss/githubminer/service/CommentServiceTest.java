@@ -29,7 +29,7 @@ public class CommentServiceTest {
 
         // Aserciones
         assertNotNull(comments, "La lista de comentarios no debería ser nula");
-        assertTrue(comments.size() > 0, "La lista debería contener al menos un comentario");
+        assertFalse(comments.isEmpty(), "La lista debería contener al menos un comentario");
 
         // Imprimir resultados para verificar
         comments.forEach(comment -> System.out.println("Comentario ID: " + comment.getId() + ", Cuerpo: " + comment.getBody()));

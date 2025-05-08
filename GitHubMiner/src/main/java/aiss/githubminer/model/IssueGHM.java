@@ -2,7 +2,6 @@ package aiss.githubminer.model;
 
 import java.util.List;
 
-import aiss.githubminer.model.issueD.IssueAssignee;
 import aiss.githubminer.model.issueD.IssueLabel;
 import aiss.githubminer.model.issueD.IssueMilestone;
 import aiss.githubminer.model.issueD.IssuePullRequest;
@@ -41,9 +40,9 @@ public class IssueGHM {
     @JsonProperty("labels")
     private List<IssueLabel> labels;
     @JsonProperty("assignee")
-    private IssueAssignee assignee;
+    private UserGHM assignee;
     @JsonProperty("assignees")
-    private List<IssueAssignee> assignees;
+    private List<UserGHM> assignees;
     @JsonProperty("milestone")
     private IssueMilestone milestone;
     @JsonProperty("locked")
@@ -206,22 +205,22 @@ public class IssueGHM {
     }
 
     @JsonProperty("assignee")
-    public IssueAssignee getAssignee() {
+    public UserGHM getAssignee() {
         return assignee;
     }
 
     @JsonProperty("assignee")
-    public void setAssignee(IssueAssignee assignee) {
+    public void setAssignee(UserGHM assignee) {
         this.assignee = assignee;
     }
 
     @JsonProperty("assignees")
-    public List<IssueAssignee> getAssignees() {
+    public List<UserGHM> getAssignees() {
         return assignees;
     }
 
     @JsonProperty("assignees")
-    public void setAssignees(List<IssueAssignee> assignees) {
+    public void setAssignees(List<UserGHM> assignees) {
         this.assignees = assignees;
     }
 
