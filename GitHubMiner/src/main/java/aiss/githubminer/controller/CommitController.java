@@ -14,13 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/commits")
+@RequestMapping("/github")
 public class CommitController {
 
     @Autowired
     private CommitService commitService;
 
-    @GetMapping("/github/{owner}/{repo}")
+    // GET uri: http://localhost:8082/github/octocat/Hello-World/commits
+
+    @GetMapping("/{owner}/{repo}/commits")
     public ResponseEntity<List<CommitGHM>> getAllCommitsGHM(@PathVariable String owner,
                                                             @PathVariable String repo) {
         List<CommitGHM> commits = commitService.getAllCommits(owner, repo);
@@ -28,19 +30,4 @@ public class CommitController {
     }
 }
 
-//    public Optional<CommitGHM> getCommitById(String id) {
-//        return commitService.findById(id);
-//    }
-//
-//    public List<Commit> saveCommits(List<Commit> commits) {
-//        return commitRepository.saveAll(commits);
-//    }
-//
-//    public Commit saveCommit(Commit commit) {
-//        return commitRepository.save(commit);
-//    }
-//
-//    public void deleteCommitById(String id) {
-//        commitRepository.deleteById(id);
-//    }
 

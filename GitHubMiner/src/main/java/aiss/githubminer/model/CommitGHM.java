@@ -1,14 +1,10 @@
 package aiss.githubminer.model;
 
 import java.util.List;
-import javax.annotation.Generated;
 
 import aiss.githubminer.model.commitD.*;
-import aiss.gitminer.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CommitGHM {

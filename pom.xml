@@ -11,6 +11,13 @@
 	<name>ProyectoGitMiner</name>
 	<description>Herramienta de minería de repositorios Git para integración de sistemas software</description>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.4</version>
+		<relativePath/>
+	</parent>
+
 	<modules>
 		<module>GitMiner</module>
 		<module>GitHubMiner</module>
