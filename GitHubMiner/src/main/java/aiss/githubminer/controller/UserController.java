@@ -21,4 +21,6 @@ public class UserController {
         UserGHM user = userService.getUser(username);
         return ResponseEntity.ok(user);
     }
+
+
 }
