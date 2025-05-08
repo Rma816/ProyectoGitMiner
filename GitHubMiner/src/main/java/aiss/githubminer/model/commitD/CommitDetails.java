@@ -7,7 +7,7 @@ public class CommitDetails {
     private CommitAuthor author;
     private CommitAuthor committer;
     private String message;
-    private Tree tree;
+    private CommitTree tree;
     private int comment_count;
     private CommitVerification verification;
 
@@ -24,8 +24,8 @@ public class CommitDetails {
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 
-    public Tree getTree() { return tree; }
-    public void setTree(Tree tree) { this.tree = tree; }
+    public CommitTree getTree() { return tree; }
+    public void setTree(CommitTree tree) { this.tree = tree; }
 
     public int getComment_count() { return comment_count; }
     public void setComment_count(int comment_count) { this.comment_count = comment_count; }

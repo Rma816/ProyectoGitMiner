@@ -1,12 +1,14 @@
 package aiss.githubminer.model;
 
-import aiss.githubminer.model.commitD.CommitDetails;
-import aiss.githubminer.model.commitD.CommitParent;
-
 import java.util.List;
+import javax.annotation.Generated;
 
+import aiss.githubminer.model.commitD.*;
+import aiss.gitminer.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CommitGHM {
@@ -24,11 +26,15 @@ public class CommitGHM {
     @JsonProperty("commit")
     private CommitDetails commit;
     @JsonProperty("author")
-    private UserGHM author;
+    private CommitAuthor author;
     @JsonProperty("committer")
-    private UserGHM committer;
+    private CommitAuthor committer;
     @JsonProperty("parents")
     private List<CommitParent> parents;
+    @JsonProperty("stats")
+    private CommitStats stats;
+    @JsonProperty("files")
+    private List<CommitFile> files;
 
     @JsonProperty("url")
     public String getUrl() {
@@ -91,22 +97,22 @@ public class CommitGHM {
     }
 
     @JsonProperty("author")
-    public UserGHM getAuthor() {
+    public CommitAuthor getAuthor() {
         return author;
     }
 
     @JsonProperty("author")
-    public void setAuthor(UserGHM author) {
+    public void setAuthor(CommitAuthor author) {
         this.author = author;
     }
 
     @JsonProperty("committer")
-    public UserGHM getCommitter() {
+    public CommitAuthor getCommitter() {
         return committer;
     }
 
     @JsonProperty("committer")
-    public void setCommitter(UserGHM committer) {
+    public void setCommitter(CommitAuthor committer) {
         this.committer = committer;
     }
 
@@ -118,6 +124,26 @@ public class CommitGHM {
     @JsonProperty("parents")
     public void setParents(List<CommitParent> parents) {
         this.parents = parents;
+    }
+
+    @JsonProperty("stats")
+    public CommitStats getStats() {
+        return stats;
+    }
+
+    @JsonProperty("stats")
+    public void setStats(CommitStats stats) {
+        this.stats = stats;
+    }
+
+    @JsonProperty("files")
+    public List<CommitFile> getFiles() {
+        return files;
+    }
+
+    @JsonProperty("files")
+    public void setFiles(List<CommitFile> files) {
+        this.files = files;
     }
 
     @Override
@@ -159,6 +185,14 @@ public class CommitGHM {
         sb.append("parents");
         sb.append('=');
         sb.append(((this.parents == null)?"<null>":this.parents));
+        sb.append(',');
+        sb.append("stats");
+        sb.append('=');
+        sb.append(((this.stats == null)?"<null>":this.stats));
+        sb.append(',');
+        sb.append("files");
+        sb.append('=');
+        sb.append(((this.files == null)?"<null>":this.files));
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
