@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/issues")
+@RequestMapping("/github")
 public class IssueController {
 
     @Autowired
     private IssueService issueService;
 
-    @GetMapping("/{owner}/{repo}")
+    // GET uri: http://localhost:8082/github/octocat/Hello-World/issues
+
+    @GetMapping("/{owner}/{repo}/issues")
     public ResponseEntity<List<IssueGHM>> getIssues(
             @PathVariable String owner,
             @PathVariable String repo) {

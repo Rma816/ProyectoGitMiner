@@ -5,16 +5,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.5</version>
-		<relativePath/> <!-- necesario si no está en el mismo nivel -->
+		<groupId>aiss</groupId>
+		<artifactId>ProyectoGitMiner</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<groupId>aiss.gitminer</groupId>
 	<artifactId>GitMiner</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>GitMiner</name>
+	<packaging>jar</packaging>
 	<description>Microservicio para minería de datos desde GitHub</description>
 
 	<properties>
@@ -43,6 +44,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
 		</dependency>
 	</dependencies>
 
