@@ -2,7 +2,6 @@ package aiss.githubminer.model;
 
 import aiss.githubminer.model.commitD.CommitDetails;
 import aiss.githubminer.model.commitD.CommitParent;
-import aiss.gitminer.model.User;
 
 import java.util.List;
 
@@ -25,9 +24,9 @@ public class CommitGHM {
     @JsonProperty("commit")
     private CommitDetails commit;
     @JsonProperty("author")
-    private User author;
+    private UserGHM author;
     @JsonProperty("committer")
-    private User committer;
+    private UserGHM committer;
     @JsonProperty("parents")
     private List<CommitParent> parents;
 
@@ -92,22 +91,22 @@ public class CommitGHM {
     }
 
     @JsonProperty("author")
-    public User getAuthor() {
+    public UserGHM getAuthor() {
         return author;
     }
 
     @JsonProperty("author")
-    public void setAuthor(User author) {
+    public void setAuthor(UserGHM author) {
         this.author = author;
     }
 
     @JsonProperty("committer")
-    public User getCommitter() {
+    public UserGHM getCommitter() {
         return committer;
     }
 
     @JsonProperty("committer")
-    public void setCommitter(User committer) {
+    public void setCommitter(UserGHM committer) {
         this.committer = committer;
     }
 
