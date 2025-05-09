@@ -4,15 +4,20 @@ import aiss.githubminer.model.CommentGHM;
 import aiss.githubminer.model.IssueGHM;
 import aiss.githubminer.model.GitMiner.Issue;
 import aiss.githubminer.service.CommentService;
+import aiss.githubminer.service.IssueService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class IssueTransformer {
 
-    //TODO: revisar issues y project
+    @Autowired
+    private CommentService commentService;
 
-    public static Issue transform(IssueGHM issueGHM) {
+    public Issue transform(IssueGHM issueGHM) {
         Issue issue = new Issue();
         issue.setId(issueGHM.getId());
         issue.setTitle(issueGHM.getTitle());
@@ -23,7 +28,7 @@ public class IssueTransformer {
         issue.setClosedAt(issueGHM.getClosedAt());
         issue.setAuthor(UserTransformer.transformer(issueGHM.getUser()));
         issue.setVotes(issueGHM.getComments());
-        List<CommentGHM> comments = CommentService.getCommentsByURL(issueGHM.getCommentsUrl());
+        List<CommentGHM> comments = commentService.getCommentsURL(issueGHM.getCommentsUrl());
         issue.setComments(CommentTransformer.transformList(comments));
         if (issueGHM.getAssignee() != null) {
             issue.setAssignee(UserTransformer.transformer(issueGHM.getAssignee()));
@@ -31,9 +36,9 @@ public class IssueTransformer {
         return issue;
     }
 
-    public static List<Issue> transformList(List<IssueGHM> issuesGHM) {
+    public List<Issue> transformList(List<IssueGHM> issuesGHM) {
         return issuesGHM.stream()
-                .map(IssueTransformer::transform)
+                .map(this::transform)
                 .collect(Collectors.toList());
     }
 }
