@@ -4,6 +4,7 @@ import aiss.bitbucketminer.model.dependencies.Content;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+
 @Data
 public class BitBucketComment {
     @JsonProperty("id")
@@ -23,6 +24,4 @@ public class BitBucketComment {
     public String getRaw() {
         return content != null ? content.getRaw() : null;
     }
-
-
 }

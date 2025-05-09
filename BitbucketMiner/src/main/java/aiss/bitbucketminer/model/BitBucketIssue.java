@@ -14,8 +14,6 @@ import java.util.List;
 
 import static aiss.bitbucketminer.service.CommentService.obtenerCommentDesdeUrl;
 
-@Setter
-@Getter
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BitBucketIssue {
