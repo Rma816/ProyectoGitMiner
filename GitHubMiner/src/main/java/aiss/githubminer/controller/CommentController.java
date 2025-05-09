@@ -4,6 +4,7 @@ import aiss.githubminer.model.CommentGHM;
 import aiss.githubminer.model.GitMiner.Comment;
 import aiss.githubminer.model.ProjectGHM;
 import aiss.githubminer.service.CommentService;
+import aiss.githubminer.transformer.CommentTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,7 @@ public class CommentController {
                                                         @PathVariable String repo,
                                                         @PathVariable String issueId) {
         List<CommentGHM> comments = commentService.getAllComments(owner, repo, issueId);
-        List<Comment> commentsList = commentService.mapComments(comments);
+        List<Comment> commentsList = CommentTransformer.transformList(comments);
         return ResponseEntity.ok(commentsList);
     }
 }
