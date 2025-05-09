@@ -4,17 +4,14 @@ import aiss.githubminer.model.CommitGHM;
 import aiss.githubminer.model.IssueGHM;
 import aiss.githubminer.model.ProjectGHM;
 import aiss.githubminer.service.CommitService;
-import aiss.githubminer.model.GitMiner.*;
+import aiss.gitminer.model.Commit;
+import aiss.gitminer.model.Issue;
+import aiss.gitminer.model.Project;
 import aiss.githubminer.service.IssueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class ProjectTransformer {
@@ -25,52 +22,23 @@ public class ProjectTransformer {
     @Autowired
     private IssueTransformer issueTransformer;
 
-
-    public Project transform(ProjectGHM projectGHM, Integer sinceCommitsDays, Integer sinceIssuesDays, Integer maxPages) {
+    public Project transform(ProjectGHM projectGHM) {
         Project project = new Project();
         project.setId(String.valueOf(projectGHM.getId()));
         project.setName(projectGHM.getName());
         project.setWebUrl(projectGHM.getUrl());
 
-        // Fecha límite para commits e issues
-        LocalDateTime commitLimitDate = LocalDateTime.now().minusDays(sinceCommitsDays);
-        LocalDateTime issueLimitDate = LocalDateTime.now().minusDays(sinceIssuesDays);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
-
-        // Obtener y filtrar commits por fecha
-        List<CommitGHM> commitGHMs = CommitService.getCommitsURL(projectGHM.getCommitsUrl(), maxPages);
-        List<Commit> commits = CommitTransformer.transformList(commitGHMs).stream()
-                .filter(c -> {
-                    try {
-                        if (c.getAuthoredDate() == null) return false;
-                        ZonedDateTime authoredDate = ZonedDateTime.parse(c.getAuthoredDate(), formatter);
-                        return OffsetDateTime.parse(c.getAuthoredDate()).toLocalDateTime().isAfter(commitLimitDate);
-                    } catch (Exception e) {
-                        return false;
-                    }
-                })
-                .collect(Collectors.toList());
-
+        // Se obtienen los commits de la url en formato de GitHubMiner,
+        // luego se transforman a los de GitMiner
+        List<CommitGHM> commitGHMs = CommitService.getCommitsURL(projectGHM.getCommitsUrl());
+        List<Commit> commits = CommitTransformer.transformList(commitGHMs);
         project.setCommits(commits);
 
-        // Obtener y filtrar issues por fecha
-        List<IssueGHM> issuesGHMs = issueService.getIssuesURL(projectGHM.getIssuesUrl(), maxPages);
-        List<Issue> issues = issueTransformer.transformList(issuesGHMs).stream()
-                .filter(i -> {
-                    try {
-                        if (i.getUpdatedAt() == null) return false;
-                        ZonedDateTime updatedAt = ZonedDateTime.parse(i.getUpdatedAt(), formatter);
-                        return OffsetDateTime.parse(i.getUpdatedAt()).toLocalDateTime().isAfter(issueLimitDate);
-                    } catch (Exception e) {
-                        return false; // Si hay un error en la conversión, lo ignoramos
-                    }
-                })
-                .collect(Collectors.toList());
-
+        // Se obtienen los issues de la url en formato de GitHubMiner,
+        // luego se transforman a los de GitMiner
+        List<IssueGHM> issuesGHMs = issueService.getIssuesURL(projectGHM.getIssuesUrl());
+        List<Issue> issues = issueTransformer.transformList(issuesGHMs);
         project.setIssues(issues);
-
         return project;
     }
-
 }

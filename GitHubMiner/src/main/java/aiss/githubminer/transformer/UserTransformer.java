@@ -1,7 +1,7 @@
 package aiss.githubminer.transformer;
 
 import aiss.githubminer.model.UserGHM;
-import aiss.githubminer.model.GitMiner.User;
+import aiss.gitminer.model.User;
 
 public class UserTransformer {
 

@@ -1,8 +1,9 @@
-
 package aiss.gitminer.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class Issue {
     private User author;
     @JsonProperty("assignee")
     @JoinColumn(name = "assignee_id",referencedColumnName = "id")
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade= CascadeType.ALL)
     private User assignee;
     @JsonProperty("votes")
     private Integer votes;

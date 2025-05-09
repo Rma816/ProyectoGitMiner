@@ -1,7 +1,7 @@
 package aiss.githubminer.controller;
 
 import aiss.githubminer.model.CommentGHM;
-import aiss.githubminer.model.GitMiner.Comment;
+import aiss.gitminer.model.Comment;
 import aiss.githubminer.model.ProjectGHM;
 import aiss.githubminer.service.CommentService;
 import aiss.githubminer.transformer.CommentTransformer;

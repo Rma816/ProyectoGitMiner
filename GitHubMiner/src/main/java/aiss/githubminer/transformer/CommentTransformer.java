@@ -1,7 +1,7 @@
 package aiss.githubminer.transformer;
 
 import aiss.githubminer.model.CommentGHM;
-import aiss.githubminer.model.GitMiner.Comment;
+import aiss.gitminer.model.Comment;
 
 import java.util.List;
 import java.util.stream.Collectors;

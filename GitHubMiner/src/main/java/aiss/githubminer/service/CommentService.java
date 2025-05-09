@@ -1,7 +1,7 @@
 package aiss.githubminer.service;
 
 import aiss.githubminer.model.CommentGHM;
-import aiss.githubminer.model.GitMiner.Comment;
+import aiss.gitminer.model.Comment;
 import aiss.githubminer.model.IssueGHM;
 import aiss.githubminer.transformer.CommentTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +21,19 @@ import java.util.stream.Collectors;
 @Service
 public class CommentService {
 
-    @Autowired
-    RestTemplate restTemplate;
-
     @Value("${github.token}")
-    private String token;
+    private static String token;
 
     // Se extraen los comentarios de GitHubMiner
 
-    public List<CommentGHM> getAllComments(String owner, String repo, String issue) {
+    public static List<CommentGHM> getAllComments(String owner, String repo, String issue) {
+        RestTemplate restTemplate = new RestTemplate();
         String url = "https://api.github.com/repos/" + owner + "/" + repo + "/issues/" + issue + "/comments";
         return getCommentsURL(url);
     }
 
-    public List<CommentGHM> getCommentsURL(String url) {
+    public static List<CommentGHM> getCommentsURL(String url) {
+        RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + token);
         headers.add("User-Agent", "GitMinerApp");

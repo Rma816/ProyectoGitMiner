@@ -1,6 +1,6 @@
 package aiss.githubminer.controller;
 
-import aiss.githubminer.model.GitMiner.Issue;
+import aiss.gitminer.model.Issue;
 import aiss.githubminer.service.IssueService;
 import aiss.githubminer.model.IssueGHM;
 import aiss.githubminer.transformer.IssueTransformer;

@@ -1,6 +1,6 @@
 package aiss.githubminer.controller;
 
-import aiss.githubminer.model.GitMiner.Project;
+import aiss.gitminer.model.Project;
 import aiss.githubminer.service.ProjectService;
 import aiss.githubminer.transformer.ProjectTransformer;
 import org.springframework.beans.factory.annotation.Autowired;

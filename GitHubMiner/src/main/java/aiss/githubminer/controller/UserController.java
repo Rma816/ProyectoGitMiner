@@ -1,6 +1,6 @@
 package aiss.githubminer.controller;
 
-import aiss.githubminer.model.GitMiner.User;
+import aiss.gitminer.model.User;
 import aiss.githubminer.model.UserGHM;
 import aiss.githubminer.service.UserService;
 import aiss.githubminer.transformer.UserTransformer;

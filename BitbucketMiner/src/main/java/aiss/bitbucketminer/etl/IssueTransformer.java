@@ -1,7 +1,7 @@
 package aiss.bitbucketminer.etl;
 
 import aiss.bitbucketminer.model.BitBucketIssue;
-import aiss.bitbucketminer.model.GitMiner.Issue;
+import aiss.gitminer.model.Issue;
 
 import java.util.stream.Collectors;
 

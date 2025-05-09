@@ -1,7 +1,7 @@
 package aiss.githubminer.service;
 
 import aiss.githubminer.model.CommitGHM;
-import aiss.githubminer.model.GitMiner.Commit;
+import aiss.gitminer.model.Commit;
 import aiss.githubminer.transformer.CommitTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;

@@ -1,7 +1,7 @@
 package aiss.githubminer.controller;
 
 import aiss.githubminer.model.CommitGHM;
-import aiss.githubminer.model.GitMiner.Commit;
+import aiss.gitminer.model.Commit;
 import aiss.githubminer.service.CommitService;
 import aiss.githubminer.service.IssueService;
 import aiss.githubminer.transformer.CommitTransformer;
