@@ -4,7 +4,6 @@ import aiss.githubminer.model.CommentGHM;
 import aiss.githubminer.model.IssueGHM;
 import aiss.githubminer.model.GitMiner.Issue;
 import aiss.githubminer.service.CommentService;
-import aiss.githubminer.service.IssueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,13 +18,13 @@ public class IssueTransformer {
 
     public Issue transform(IssueGHM issueGHM) {
         Issue issue = new Issue();
-        issue.setId(issueGHM.getId());
+        issue.setId(String.valueOf(issueGHM.getId()));
         issue.setTitle(issueGHM.getTitle());
         issue.setDescription(issueGHM.getBody());
         issue.setState(issueGHM.getState());
         issue.setCreatedAt(issueGHM.getCreatedAt());
         issue.setUpdatedAt(issueGHM.getUpdatedAt());
-        issue.setClosedAt(issueGHM.getClosedAt());
+        issue.setClosedAt(String.valueOf(issueGHM.getClosedAt()));
         issue.setAuthor(UserTransformer.transformer(issueGHM.getUser()));
         issue.setVotes(issueGHM.getComments());
         List<CommentGHM> comments = commentService.getCommentsURL(issueGHM.getCommentsUrl());

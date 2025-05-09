@@ -11,12 +11,14 @@ public class ProjectTransformer {
         Project newProject = new Project();
         newProject.setName(project.getName());
         newProject.setId(project.getId());
+
         // Limitar commits según nCommits y maxPages
         List<Commit> commits = project.getCommits().getCommits().stream()
                 .limit((long) nCommits * maxPages)
                 .map(CommitTransformer::transformCommit)
                 .collect(Collectors.toList());
         newProject.setCommits(commits);
+
         // Limitar issues según nIssues y maxPages
         List<Issue> issues = project.getIssues().getIssues().stream()
                 .limit((long) nIssues * maxPages)

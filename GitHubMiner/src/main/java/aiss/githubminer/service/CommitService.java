@@ -28,7 +28,7 @@ public class CommitService {
         return Arrays.asList(arrayCommits);
     }
 
-    public static List<CommitGHM> getCommitsURL(String commitsUrl) {
+    public static List<CommitGHM> getCommitsURL(String commitsUrl, Integer maxPages) {
         RestTemplate restTemplate = new RestTemplate();
         try {
             String cleanedUrl = commitsUrl.replace("{/sha}", "");
@@ -39,15 +39,27 @@ public class CommitService {
 
             HttpEntity<String> entity = new HttpEntity<>(headers);
 
-            ResponseEntity<CommitGHM[]> response = restTemplate.exchange(
-                    cleanedUrl,
-                    HttpMethod.GET,
-                    entity,
-                    CommitGHM[].class
-            );
+            List<CommitGHM> allCommits = new java.util.ArrayList<>();
 
-            CommitGHM[] commits = response.getBody();
-            return Arrays.asList(commits != null ? commits : new CommitGHM[0]);
+            for (int page = 1; page <= maxPages; page++) {
+                String paginatedUrl = cleanedUrl + "?per_page=100&page=" + page;
+
+                ResponseEntity<CommitGHM[]> response = restTemplate.exchange(
+                        paginatedUrl,
+                        HttpMethod.GET,
+                        entity,
+                        CommitGHM[].class
+                );
+
+                CommitGHM[] commits = response.getBody();
+                if (commits == null || commits.length == 0) {
+                    break; // No hay más datos
+                }
+
+                allCommits.addAll(Arrays.asList(commits));
+            }
+
+            return allCommits;
         } catch (Exception e) {
             System.err.println("Error al obtener commits: " + e.getMessage());
             return Collections.emptyList();

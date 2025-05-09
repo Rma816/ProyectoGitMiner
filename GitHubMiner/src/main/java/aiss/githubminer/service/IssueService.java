@@ -35,7 +35,7 @@ public class IssueService {
         return Arrays.asList(response.getBody());
     }
 
-    public List<IssueGHM> getIssuesURL(String issuesUrl) {
+    public List<IssueGHM> getIssuesURL(String issuesUrl, Integer maxPages) {
         String cleanedUrl = issuesUrl.replace("{/number}", "");
 
         HttpHeaders headers = new HttpHeaders();
@@ -44,14 +44,31 @@ public class IssueService {
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<IssueGHM[]> response = restTemplate.exchange(
-                cleanedUrl,
-                HttpMethod.GET,
-                entity,
-                IssueGHM[].class
-        );
+        List<IssueGHM> allIssues = new java.util.ArrayList<>();
 
-        IssueGHM[] issues = response.getBody();
-        return Arrays.asList(issues != null ? issues : new IssueGHM[0]);
+        try {
+            for (int page = 1; page <= maxPages; page++) {
+                String paginatedUrl = cleanedUrl + "?per_page=100&page=" + page;
+
+                ResponseEntity<IssueGHM[]> response = restTemplate.exchange(
+                        paginatedUrl,
+                        HttpMethod.GET,
+                        entity,
+                        IssueGHM[].class
+                );
+
+                IssueGHM[] issues = response.getBody();
+                if (issues == null || issues.length == 0) {
+                    break;
+                }
+
+                allIssues.addAll(Arrays.asList(issues));
+            }
+        } catch (Exception e) {
+            System.err.println("Error al obtener issues: " + e.getMessage());
+        }
+
+        return allIssues;
     }
+
 }
