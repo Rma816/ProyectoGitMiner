@@ -47,27 +47,6 @@ public class Issue {
     @JoinColumn(name = "issueId")
     private List<Comment> comments;
 
-    public Issue(String id, String title, String description, String createdAt,
-                 String state, String updatedAt, String closedAt, List<String> labels,
-                 User assignee, User author, Integer votes, List<Comment> comments) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.createdAt = createdAt;
-        this.state = state;
-        this.updatedAt = updatedAt;
-        this.closedAt = closedAt;
-        this.labels = labels;
-        this.assignee = assignee;
-        this.author = author;
-        this.votes = votes;
-        this.comments = comments;
-    }
-
-    public Issue() {
-
-    }
-
     public String getId() {
         return id;
     }

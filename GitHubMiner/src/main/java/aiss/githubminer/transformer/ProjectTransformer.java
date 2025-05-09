@@ -1,41 +1,23 @@
 package aiss.githubminer.transformer;
 
-import aiss.githubminer.model.CommitGHM;
-import aiss.githubminer.model.IssueGHM;
 import aiss.githubminer.model.ProjectGHM;
 import aiss.githubminer.service.CommitService;
 import aiss.githubminer.model.GitMiner.*;
 import aiss.githubminer.service.IssueService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public class ProjectTransformer {
 
-    @Autowired
-    private IssueService issueService;
-
-    @Autowired
-    private IssueTransformer issueTransformer;
-
-    public Project transform(ProjectGHM projectGHM) {
+    public static Project transform(ProjectGHM projectGHM) {
         Project project = new Project();
         project.setId(String.valueOf(projectGHM.getId()));
         project.setName(projectGHM.getName());
         project.setWebUrl(projectGHM.getUrl());
-
-        // Se obtienen los commits de la url en formato de GitHubMiner,
-        // luego se transforman a los de GitMiner
-        List<CommitGHM> commitGHMs = CommitService.getCommitsURL(projectGHM.getCommitsUrl());
-        List<Commit> commits = CommitTransformer.transformList(commitGHMs);
+        List<Commit> commits = CommitTransformer
+                .transformList(CommitService.getCommitsURL(projectGHM.getCommitsUrl()));
         project.setCommits(commits);
-
-        // Se obtienen los issues de la url en formato de GitHubMiner,
-        // luego se transforman a los de GitMiner
-        List<IssueGHM> issuesGHMs = issueService.getIssuesURL(projectGHM.getIssuesUrl());
-        List<Issue> issues = issueTransformer.transformList(issuesGHMs);
+        List<Issue> issues = IssueTransformer.transformList(IssueService.getIssuesURL(projectGHM.getIssuesUrl()));
         project.setIssues(issues);
         return project;
     }

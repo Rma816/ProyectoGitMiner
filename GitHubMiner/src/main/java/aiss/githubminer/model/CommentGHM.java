@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CommentGHM {
 
     @JsonProperty("id")
-    private Long id;
+    private Integer id;
     @JsonProperty("node_id")
     private String nodeId;
     @JsonProperty("url")
@@ -28,12 +28,12 @@ public class CommentGHM {
     private String authorAssociation;
 
     @JsonProperty("id")
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

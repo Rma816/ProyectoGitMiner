@@ -18,16 +18,13 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @Autowired
-    private ProjectTransformer transformer;
-
     // GET uri: http://localhost:8082/github/octocat/Hello-World
 
     @GetMapping("/{owner}/{repo}")
     public ResponseEntity<Project> getProject(@PathVariable String owner,
                                                             @PathVariable String repo) {
         ProjectGHM project = projectService.getProject(owner, repo);
-        Project mapProject = transformer.transform(project);
+        Project mapProject = ProjectTransformer.transform(project);
         return ResponseEntity.ok(mapProject);
     }
 }

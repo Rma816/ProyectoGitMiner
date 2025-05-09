@@ -2,12 +2,9 @@ package aiss.githubminer.service;
 
 import aiss.githubminer.model.CommitGHM;
 import aiss.githubminer.model.GitMiner.Commit;
+import aiss.githubminer.model.IssueGHM;
 import aiss.githubminer.transformer.CommitTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,6 +20,7 @@ public class CommitService {
     RestTemplate restTemplate;
 
     public List<CommitGHM> getAllCommits(String owner, String repo) {
+        List<CommitGHM> commits = null;
         String uri = "https://api.github.com/repos/" + owner + "/" + repo + "/commits";
         CommitGHM[] arrayCommits = restTemplate.getForObject(uri, CommitGHM[].class);
         return Arrays.asList(arrayCommits);
@@ -31,26 +29,22 @@ public class CommitService {
     public static List<CommitGHM> getCommitsURL(String commitsUrl) {
         RestTemplate restTemplate = new RestTemplate();
         try {
-            String cleanedUrl = commitsUrl.replace("{/sha}", "");
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("User-Agent", "MyApp");
-            headers.set("Authorization", "Bearer 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");
-
-            HttpEntity<String> entity = new HttpEntity<>(headers);
-
-            ResponseEntity<CommitGHM[]> response = restTemplate.exchange(
-                    cleanedUrl,
-                    HttpMethod.GET,
-                    entity,
-                    CommitGHM[].class
-            );
-
-            CommitGHM[] commits = response.getBody();
+            CommitGHM[] commits = restTemplate.getForObject(commitsUrl, CommitGHM[].class);
             return Arrays.asList(commits != null ? commits : new CommitGHM[0]);
         } catch (Exception e) {
-            System.err.println("Error al obtener commits: " + e.getMessage());
+            System.err.println("Error al obtener issues: " + e.getMessage());
             return Collections.emptyList();
         }
+    }
+
+    public CommitGHM getCommitByRef(String author, String repo, String ref) {
+        CommitGHM commit = null;
+        String uri = "https://api.github.com/repos/" + author + "/" + repo + "/commits/" + ref;
+        commit = restTemplate.getForObject(uri, CommitGHM.class);
+        return commit;
+    }
+
+    public List<Commit> mapCommits(List<CommitGHM> commits) {
+        return commits.stream().map(CommitTransformer::transform).collect(Collectors.toList());
     }
 }

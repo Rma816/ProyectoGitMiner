@@ -3,7 +3,6 @@ package aiss.githubminer.controller;
 import aiss.githubminer.model.GitMiner.Issue;
 import aiss.githubminer.service.IssueService;
 import aiss.githubminer.model.IssueGHM;
-import aiss.githubminer.transformer.IssueTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +16,6 @@ public class IssueController {
     @Autowired
     private IssueService issueService;
 
-    @Autowired
-    private IssueTransformer transformer;
-
     // GET uri: http://localhost:8082/github/octocat/Hello-World/issues
 
     @GetMapping("/{owner}/{repo}/issues")
@@ -28,7 +24,7 @@ public class IssueController {
             @PathVariable String repo) {
 
         List<IssueGHM> issues = issueService.getIssues(owner, repo);
-        List<Issue> issueList = transformer.transformList(issues);
+        List<Issue> issueList = issueService.mapIssues(issues);
         return ResponseEntity.ok(issueList);
     }
 }

@@ -29,18 +29,6 @@ public class Comment {
     @JsonProperty("updated_at")
     private String updatedAt;
 
-    public Comment(String id, String body, User author, String createdAt, String updatedAt) {
-    this.id = id;
-    this.body = body;
-    this.author = author;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-    }
-
-    public Comment() {
-
-    }
-
     public String getId() {
         return id;
     }

@@ -27,23 +27,9 @@ public class Commit {
     @NotEmpty(message = "Author date cannot be empty.")
     private String authoredDate;
 
-    public Commit(String id, String title, String message, String authorName, String authorEmail, String authoredDate, String webUrl) {
-        this.id = id;
-        this.title = title;
-        this.message = message;
-        this.authorName = authorName;
-        this.authorEmail = authorEmail;
-        this.authoredDate = authoredDate;
-        this.webUrl = webUrl;
-    }
-
-    public Commit() {
-    }
-
     @JsonProperty("web_url")
     @NotEmpty(message = "URL cannot be empty." +
             "")
-
     private String webUrl;
 
     public String getId() {
