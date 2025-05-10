@@ -1,7 +1,6 @@
 package aiss.githubminer.service;
 
 import aiss.githubminer.model.CommentGHM;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -15,9 +14,6 @@ import java.util.List;
 
 @Service
 public class CommentService {
-
-    @Value("${github.token}") // Con esto da error, si se pone directamente no
-    private static String token;
 
     // Se extraen los comentarios de GitHubMiner
 

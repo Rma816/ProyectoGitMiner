@@ -5,7 +5,12 @@ import org.springframework.web.client.RestTemplate;
 
 public class UserService {
     public static BitBucketUser getUserFromUrl(String url) {
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(url, BitBucketUser.class);
-    }
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            return restTemplate.getForObject(url, BitBucketUser.class);
+        } catch (Exception e) {
+                System.err.println("Failed to obtain the user: " + e.getMessage());
+                return null;
+            }
+        }
 }

@@ -12,7 +12,12 @@ public class UserService {
     RestTemplate restTemplate;
 
     public UserGHM getUser(String username) {
-        String url = "https://api.github.com/users/" + username;
-        return restTemplate.getForObject(url, UserGHM.class);
+        try {
+            String url = "https://api.github.com/users/" + username;
+            return restTemplate.getForObject(url, UserGHM.class);
+        } catch (Exception e) {
+            System.err.println("Failed to obtain the user: " + e.getMessage());
+            return null;
+        }
     }
 }

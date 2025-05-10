@@ -2,6 +2,7 @@ package aiss.githubminer.service;
 
 import aiss.githubminer.model.CommitGHM;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -19,10 +20,24 @@ public class CommitService {
     @Autowired
     RestTemplate restTemplate;
 
+    @Value("${github.token}")
+    private String token;
+
     public List<CommitGHM> getAllCommits(String owner, String repo) {
-        String uri = "https://api.github.com/repos/" + owner + "/" + repo + "/commits";
-        CommitGHM[] arrayCommits = restTemplate.getForObject(uri, CommitGHM[].class);
-        return Arrays.asList(arrayCommits);
+        try {
+            String uri = "https://api.github.com/repos/" + owner + "/" + repo + "/commits";
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Authorization", "Bearer " + token);
+
+            HttpEntity<String> entity = new HttpEntity<>(headers);
+            ResponseEntity<CommitGHM[]> response = restTemplate.exchange(
+                    uri, HttpMethod.GET, entity, CommitGHM[].class);
+
+            return response.getBody() != null? Arrays.asList(response.getBody()): Collections.emptyList();
+        } catch (Exception e) {
+            System.err.println("Failed to obtain commits: " + e.getMessage());
+            return Collections.emptyList();
+        }
     }
 
     public static List<CommitGHM> getCommitsURL(String commitsUrl, Integer maxPages) {
@@ -58,7 +73,7 @@ public class CommitService {
 
             return allCommits;
         } catch (Exception e) {
-            System.err.println("Error al obtener commits: " + e.getMessage());
+            System.err.println("Failed to obtain commits: " + e.getMessage());
             return Collections.emptyList();
         }
     }

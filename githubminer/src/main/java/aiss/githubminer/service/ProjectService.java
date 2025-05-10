@@ -23,8 +23,13 @@ public class ProjectService {
     */
 
     public ProjectGHM getProject(String owner, String repo) {
-        String url = "https://api.github.com/repos/" + owner + "/" + repo;
-        return restTemplate.getForObject(url, ProjectGHM.class);
+        try {
+            String url = "https://api.github.com/repos/" + owner + "/" + repo;
+            return restTemplate.getForObject(url, ProjectGHM.class);
+        } catch (Exception e) {
+            System.err.println("Failed to obtain the project: " + e.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -32,10 +37,15 @@ public class ProjectService {
      */
 
     public Project getMapProject(String owner, String repo, Integer sinceCommits, Integer sinceIssues, Integer maxPages) {
-        String url = "https://api.github.com/repos/" + owner + "/" + repo;
-        ProjectGHM projectGHM = restTemplate.getForObject(url, ProjectGHM.class);
+        try {
+            String url = "https://api.github.com/repos/" + owner + "/" + repo;
+            ProjectGHM projectGHM = restTemplate.getForObject(url, ProjectGHM.class);
 
-        return transformer.transform(projectGHM, sinceCommits, sinceIssues, maxPages);
+            return projectGHM != null? transformer.transform(projectGHM, sinceCommits, sinceIssues, maxPages):null;
+        } catch (Exception e) {
+            System.err.println("Failed to obtain the project: " + e.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -43,18 +53,23 @@ public class ProjectService {
      */
 
     public Project sendProject(String owner, String repo, Integer sinceCommits, Integer sinceIssues, Integer maxPages) {
-        Project projectToSend = getMapProject(owner, repo, sinceCommits, sinceIssues, maxPages);
+        try {
+            Project projectToSend = getMapProject(owner, repo, sinceCommits, sinceIssues, maxPages);
 
-        if (projectToSend == null) {
-            throw new IllegalArgumentException("Project not found");
-        }
-        String gitMinerUrl = "http://localhost:8080/gitminer/projects";
-        ResponseEntity<Project> response = restTemplate.postForEntity(gitMinerUrl, projectToSend, Project.class);
+            if (projectToSend == null) {
+                throw new IllegalArgumentException("Project not found");
+            }
+            String gitMinerUrl = "http://localhost:8080/gitminer/projects";
+            ResponseEntity<Project> response = restTemplate.postForEntity(gitMinerUrl, projectToSend, Project.class);
 
-        if (response.getStatusCode() == HttpStatus.CREATED) {
-            return response.getBody();
-        } else {
-            throw new IllegalStateException("Failed to create project: " + response.getStatusCode());
+            if (response.getStatusCode() == HttpStatus.CREATED) {
+                return response.getBody();
+            } else {
+                throw new IllegalStateException("Failed to create project: " + response.getStatusCode());
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to create project: " + e.getMessage());
+            return null;
         }
     }
 

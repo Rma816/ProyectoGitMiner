@@ -25,16 +25,21 @@ public class IssueService {
     private String token;
 
     public List<IssueGHM> getIssues(String owner, String repo) {
-        String url = String.format("https://api.github.com/repos/%s/%s/issues", owner, repo);
+        try {
+            String url = String.format("https://api.github.com/repos/%s/%s/issues", owner, repo);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer " + token);
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Authorization", "Bearer " + token);
 
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<IssueGHM[]> response = restTemplate.exchange(
-                url, HttpMethod.GET, entity, IssueGHM[].class);
+            HttpEntity<String> entity = new HttpEntity<>(headers);
+            ResponseEntity<IssueGHM[]> response = restTemplate.exchange(
+                    url, HttpMethod.GET, entity, IssueGHM[].class);
 
-        return Arrays.asList(response.getBody());
+            return response.getBody() != null ? Arrays.asList(response.getBody()) : Collections.emptyList();
+        } catch (Exception e) {
+            System.err.println("Failed to obtain issues: " + e.getMessage());
+            return Collections.emptyList();
+        }
     }
 
     public List<IssueGHM> getIssuesURL(String issuesUrl, Integer maxPages) {
@@ -68,7 +73,7 @@ public class IssueService {
 
             return allIssues;
         } catch (Exception e) {
-            System.err.println("Error al obtener issues: " + e.getMessage());
+            System.err.println("Failed to obtain issues: " + e.getMessage());
             return Collections.emptyList();
         }
     }

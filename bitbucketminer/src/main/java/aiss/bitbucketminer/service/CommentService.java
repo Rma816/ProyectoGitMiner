@@ -3,8 +3,6 @@ package aiss.bitbucketminer.service;
 import aiss.bitbucketminer.model.containers.BitBucketCommentContainer;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
-
 
 public class CommentService {
 
