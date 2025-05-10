@@ -20,10 +20,10 @@ public class CommentService {
                 .orElse(null); // o lanzar una excepción si no se encuentra el comentario
     }
     public Comment createComment(Comment comment) {
-        comments.add(comment);
+        if (comment != null) comments.add(comment);
         return comment;
     }
     public void createComments(List<Comment> comments) {
-        this.comments.addAll(comments);
+        if (!comments.isEmpty()) this.comments.addAll(comments);
     }
 }

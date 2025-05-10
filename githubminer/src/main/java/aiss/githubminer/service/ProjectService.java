@@ -4,6 +4,8 @@ import aiss.githubminer.model.GitMiner.Project;
 import aiss.githubminer.model.ProjectGHM;
 import aiss.githubminer.transformer.ProjectTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -40,9 +42,21 @@ public class ProjectService {
      * Función para enviar los datos a GitMiner
      */
 
-//    public ProjectGHM sendProject(String owner, String repo) {
-//        return null;
-//    }
+    public Project sendProject(String owner, String repo, Integer sinceCommits, Integer sinceIssues, Integer maxPages) {
+        Project projectToSend = getMapProject(owner, repo, sinceCommits, sinceIssues, maxPages);
+
+        if (projectToSend == null) {
+            throw new IllegalArgumentException("Project not found");
+        }
+        String gitMinerUrl = "http://localhost:8080/gitminer/projects";
+        ResponseEntity<Project> response = restTemplate.postForEntity(gitMinerUrl, projectToSend, Project.class);
+
+        if (response.getStatusCode() == HttpStatus.CREATED) {
+            return response.getBody();
+        } else {
+            throw new IllegalStateException("Failed to create project: " + response.getStatusCode());
+        }
+    }
 
 
 }

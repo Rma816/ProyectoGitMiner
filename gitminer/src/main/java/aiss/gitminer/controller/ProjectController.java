@@ -47,26 +47,32 @@ public class ProjectController {
     /*
      * Crea un nuevo proyecto en Gitminer.
      */
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
     public void createProject(@RequestBody Project project) {
+        // Imprime los datos del proyecto para asegurarse de que no está vacío
+        System.out.println("Datos del proyecto a enviar: " + project);
+
         Project createdProject = projectService.createProject(project);
         commitService.createCommits(createdProject.getCommits());
+
         List<Issue> createdIssues = issueService.createIssues(createdProject.getIssues());
-        createdIssues.stream().forEach(issue -> {
+        createdIssues.forEach(issue -> {
             User userIssue = issue.getAuthor();
             if (userIssue != null) {
                 userService.createUser(userIssue);
             }
-            commentService.createComments(issue.getComments());
-            issue.getComments().stream().forEach(comment -> {
-                User userComment = comment.getAuthor();
-                if (userComment != null) {
-                    userService.createUser(userComment);
-                }
-            });
-        });
 
+            if (issue.getComments() != null && !issue.getComments().isEmpty()) {
+                commentService.createComments(issue.getComments());
+                issue.getComments().forEach(comment -> {
+                    User userComment = comment.getAuthor();
+                    if (userComment != null) {
+                        userService.createUser(userComment);
+                    }
+                });
+            }
+        });
     }
 
 }
