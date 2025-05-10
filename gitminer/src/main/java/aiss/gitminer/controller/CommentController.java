@@ -35,5 +35,14 @@ public class CommentController {
         return ResponseEntity.ok(comment);
     }
 
+    /**
+     * Función para crear Comments
+     */
+
+    @PostMapping()
+    public ResponseEntity<List<Comment>> createComments(@RequestBody List<Comment> comments) {
+        commentService.createComments(comments);
+        return ResponseEntity.ok(comments);
+    }
 }
 

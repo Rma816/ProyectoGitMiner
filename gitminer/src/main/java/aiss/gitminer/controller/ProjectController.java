@@ -49,7 +49,7 @@ public class ProjectController {
      */
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProject(@RequestBody Project project) {
+    public Project createProject(@RequestBody Project project) {
         // Imprime los datos del proyecto para asegurarse de que no está vacío
         System.out.println("Datos del proyecto a enviar: " + project);
 
@@ -73,6 +73,7 @@ public class ProjectController {
                 });
             }
         });
+        return createdProject;
     }
 
 }

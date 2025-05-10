@@ -59,4 +59,13 @@ public class IssueController {
         return ResponseEntity.ok(issues);
     }
 
+    /**
+     * Función para crear Issues
+     */
+
+    @PostMapping()
+    public ResponseEntity<List<Issue>> createIssue(@RequestBody List<Issue> issues) {
+        issueService.createIssues(issues);
+        return ResponseEntity.ok(issues);
+    }
 }

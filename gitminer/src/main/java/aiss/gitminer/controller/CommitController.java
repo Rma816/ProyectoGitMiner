@@ -32,4 +32,14 @@ public class CommitController {
         Commit commit = commitService.getCommit(commitId);
         return ResponseEntity.ok(commit);
     }
+
+    /**
+     * Función para crear commits
+     */
+
+    @PostMapping()
+    public ResponseEntity<List<Commit>> createCommits(@RequestBody List<Commit> commits) {
+        commitService.createCommits(commits);
+        return ResponseEntity.ok(commits);
+    }
 }

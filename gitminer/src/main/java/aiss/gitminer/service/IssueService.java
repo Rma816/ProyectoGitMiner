@@ -44,6 +44,5 @@ public class IssueService {
     public List<Issue> createIssues(List<Issue> issues) {
         this.issues.addAll(issues);
         return issues;
-
     }
 }
