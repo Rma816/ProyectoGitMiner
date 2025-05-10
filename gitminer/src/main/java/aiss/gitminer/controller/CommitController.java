@@ -2,6 +2,7 @@ package aiss.gitminer.controller;
 
 import aiss.gitminer.model.Commit;
 import aiss.gitminer.repository.CommitRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,16 +12,21 @@ import java.util.List;
 @RequestMapping("/gitminer/commits")
 public class CommitController {
 
-    private final CommitRepository commitRepository;
+    @Autowired
+    CommitRepository commitRepository;
 
-    public CommitController(CommitRepository commitRepository) {
-        this.commitRepository = commitRepository;
-    }
+    /**
+     * Función para obtener todos los Commits de GitMiner
+     */
 
     @GetMapping
     public ResponseEntity<List<Commit>> findAll() {
         return ResponseEntity.ok(commitRepository.findAll());
     }
+
+    /**
+     * Función para obtener un Commit a partir de su id
+     */
 
     @GetMapping("/{id}")
     public ResponseEntity<Commit> findById(@PathVariable String id) {

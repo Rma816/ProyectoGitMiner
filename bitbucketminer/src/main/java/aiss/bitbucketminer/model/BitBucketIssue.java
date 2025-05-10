@@ -18,7 +18,7 @@ import static aiss.bitbucketminer.service.CommentService.obtenerCommentDesdeUrl;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BitBucketIssue {
     @JsonProperty("id")
-    private String id;
+    private Long id;
     @JsonProperty("title")
     private String title;
     @JsonProperty("content")

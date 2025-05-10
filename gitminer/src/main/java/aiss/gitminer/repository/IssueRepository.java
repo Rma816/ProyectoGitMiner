@@ -1,4 +1,3 @@
-// IssueRepository.java (actualizado)
 package aiss.gitminer.repository;
 
 import aiss.gitminer.model.Issue;

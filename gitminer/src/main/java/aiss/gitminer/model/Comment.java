@@ -1,7 +1,6 @@
 
 package aiss.gitminer.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -16,7 +15,7 @@ public class Comment {
 
     @Id
     @JsonProperty("id")
-    private Long id;
+    private String id;
     @JsonProperty("body")
     @NotEmpty(message = "The message cannot be empty.")
     @Column(columnDefinition="TEXT")

@@ -11,7 +11,7 @@ public class CommentTransformer {
 
     public static Comment transform(CommentGHM commentGHM) {
         Comment comment = new Comment();
-        comment.setId(Long.valueOf(commentGHM.getId() != null ? commentGHM.getId().toString() : "No ID"));
+        comment.setId(commentGHM.getId() != null ? commentGHM.getId().toString() : "No ID");
         comment.setBody(commentGHM.getBody() != null ? commentGHM.getBody() : "No Body");
         comment.setCreatedAt(commentGHM.getCreatedAt() != null ? commentGHM.getCreatedAt() : "No Created At");
         comment.setUpdatedAt(commentGHM.getUpdatedAt() != null ? commentGHM.getUpdatedAt() : "No Updated At");
