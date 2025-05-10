@@ -1,7 +1,7 @@
 package aiss.bitbucketminer.etl;
 
 import aiss.bitbucketminer.model.BitBucketUser;
-import aiss.gitminer.model.User;
+import aiss.bitbucketminer.model.GitMiner.User;
 
 public class UserTransformer {
 

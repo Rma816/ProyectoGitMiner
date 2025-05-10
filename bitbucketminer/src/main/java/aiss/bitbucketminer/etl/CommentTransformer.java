@@ -1,7 +1,7 @@
 package aiss.bitbucketminer.etl;
 
 import aiss.bitbucketminer.model.BitBucketComment;
-import aiss.gitminer.model.Comment;
+import aiss.bitbucketminer.model.GitMiner.Comment;
 
 public class CommentTransformer {
 
