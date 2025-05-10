@@ -7,7 +7,7 @@ public class CommentTransformer {
 
     public static Comment transformComment (BitBucketComment comment) {
         Comment newComment = new Comment();
-        newComment.setId(comment.getId() != null ? Long.valueOf(comment.getId()) : null);
+        newComment.setId(comment.getId() != null ? comment.getId().toString() : null);
         newComment.setBody(comment.getRaw() != null ? comment.getRaw() : "No content");
         newComment.setCreatedAt(comment.getCreated_at() != null ? comment.getCreated_at() : "No date");
         newComment.setUpdatedAt(comment.getUpdated_at() != null ? comment.getUpdated_at() : "No date");
