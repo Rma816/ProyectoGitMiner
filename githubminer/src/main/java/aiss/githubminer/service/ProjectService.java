@@ -1,6 +1,6 @@
 package aiss.githubminer.service;
 
-import aiss.gitminer.model.Project;
+import aiss.githubminer.model.GitMiner.Project;
 import aiss.githubminer.model.ProjectGHM;
 import aiss.githubminer.transformer.ProjectTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,14 @@ public class ProjectService {
 
         return transformer.transform(projectGHM, sinceCommits, sinceIssues, maxPages);
     }
+
+    /**
+     * Función para enviar los datos a GitMiner
+     */
+
+//    public ProjectGHM sendProject(String owner, String repo) {
+//        return null;
+//    }
 
 
 }

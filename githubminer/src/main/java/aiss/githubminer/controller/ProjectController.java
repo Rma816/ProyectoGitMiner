@@ -1,8 +1,7 @@
 package aiss.githubminer.controller;
 
-import aiss.gitminer.model.Project;
+import aiss.githubminer.model.GitMiner.Project;
 import aiss.githubminer.service.ProjectService;
-import aiss.githubminer.transformer.ProjectTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,4 +27,11 @@ public class ProjectController {
         Project project = projectService.getMapProject(owner, repo, sinceCommits, sinceIssues, maxPages);
         return ResponseEntity.ok(project);
     }
+
+//    @PostMapping("/{owner}/{repo}")
+//    public ResponseEntity<String> sendToGitMiner(@PathVariable String owner,
+//                                                 @PathVariable String repo) {
+//        Project project = projectService.sendProject(owner, repo);
+//        return ResponseEntity.ok(project.getName());
+//    }
 }

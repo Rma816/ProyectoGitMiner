@@ -1,7 +1,7 @@
 package aiss.githubminer.transformer;
 
 import aiss.githubminer.model.CommitGHM;
-import aiss.gitminer.model.Commit;
+import aiss.githubminer.model.GitMiner.Commit;
 
 import java.util.List;
 import java.util.stream.Collectors;

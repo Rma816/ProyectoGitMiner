@@ -1,8 +1,6 @@
 package aiss.githubminer.service;
 
 import aiss.githubminer.model.CommitGHM;
-import aiss.gitminer.model.Commit;
-import aiss.githubminer.transformer.CommitTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CommitService {

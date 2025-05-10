@@ -1,8 +1,7 @@
 package aiss.githubminer.controller;
 
 import aiss.githubminer.model.CommentGHM;
-import aiss.gitminer.model.Comment;
-import aiss.githubminer.model.ProjectGHM;
+import aiss.githubminer.model.GitMiner.Comment;
 import aiss.githubminer.service.CommentService;
 import aiss.githubminer.transformer.CommentTransformer;
 import org.springframework.beans.factory.annotation.Autowired;

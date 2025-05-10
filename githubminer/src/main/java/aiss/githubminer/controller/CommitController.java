@@ -1,12 +1,10 @@
 package aiss.githubminer.controller;
 
 import aiss.githubminer.model.CommitGHM;
-import aiss.gitminer.model.Commit;
+import aiss.githubminer.model.GitMiner.Commit;
 import aiss.githubminer.service.CommitService;
-import aiss.githubminer.service.IssueService;
 import aiss.githubminer.transformer.CommitTransformer;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
