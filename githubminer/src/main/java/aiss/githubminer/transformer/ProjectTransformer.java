@@ -26,9 +26,9 @@ public class ProjectTransformer {
 
     public Project transform(ProjectGHM projectGHM, Integer sinceCommits, Integer sinceIssues, Integer maxPages) {
         Project project = new Project();
-        project.setId(String.valueOf(projectGHM.getId()));
-        project.setName(projectGHM.getName());
-        project.setWebUrl(projectGHM.getUrl());
+        project.setId(projectGHM.getId() != null ? projectGHM.getId().toString() : null);
+        project.setName(projectGHM.getName() != null ? projectGHM.getName() : "No Name");
+        project.setWebUrl(projectGHM.getUrl() != null ? projectGHM.getUrl() : "No Web Url");
 
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         LocalDateTime commitThreshold = LocalDateTime.now().minusDays(sinceCommits);
