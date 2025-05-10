@@ -1,9 +1,9 @@
 package aiss.githubminer.controller;
 
-import aiss.githubminer.model.GitMiner.User;
 import aiss.githubminer.model.UserGHM;
 import aiss.githubminer.service.UserService;
 import aiss.githubminer.transformer.UserTransformer;
+import aiss.gitminer.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +21,5 @@ public class UserController {
         User mapUser = UserTransformer.transformer(user);
         return ResponseEntity.ok(mapUser);
     }
-
-    @PostMapping("/users/")
-    public ResponseEntity<User> sendUserToGitMiner(@RequestBody User user) {
-
-        return null;
-    }
-
 
 }

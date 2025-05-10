@@ -1,9 +1,9 @@
 package aiss.githubminer.controller;
 
 import aiss.githubminer.model.CommitGHM;
-import aiss.githubminer.model.GitMiner.Commit;
 import aiss.githubminer.service.CommitService;
 import aiss.githubminer.transformer.CommitTransformer;
+import aiss.gitminer.model.Commit;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +24,7 @@ public class CommitController {
 
     @GetMapping("/{owner}/{repo}/commits")
     public ResponseEntity<List<Commit>> getAllCommitsGHM(@PathVariable String owner,
-                                                            @PathVariable String repo) {
+                                                         @PathVariable String repo) {
         List<CommitGHM> commits = commitService.getAllCommits(owner, repo);
         List<Commit> commitList = CommitTransformer.transformList(commits);
         return ResponseEntity.ok(commitList);

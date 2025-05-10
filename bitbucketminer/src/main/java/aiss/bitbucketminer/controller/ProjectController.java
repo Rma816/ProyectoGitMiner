@@ -1,7 +1,9 @@
 package aiss.bitbucketminer.controller;
 
 import aiss.bitbucketminer.service.ProjectService;
-import aiss.bitbucketminer.model.GitMiner.Project;
+import aiss.gitminer.model.Project;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -11,6 +13,9 @@ import org.springframework.web.client.RestTemplate;
 public class ProjectController {
 
     private final ProjectService projectService;
+
+    @Autowired
+    RestTemplate restTemplate;
 
     public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
@@ -38,11 +43,17 @@ public class ProjectController {
         Project project = projectService.getProject(username, repoSlug, nCommits, nIssues, maxPages); // Paso 1 y 2: get + transform
 
         // Paso 3: Enviar a GitMiner
-        String gitMinerUrl = "http://localhost:8080/gitminer/projects"; // Ajusta puerto/ruta si es diferente
-        RestTemplate restTemplate = new RestTemplate();
+        if (project == null) {
+            throw new IllegalArgumentException("Project not found");
+        }
+        String gitMinerUrl = "http://localhost:8080/gitminer/projects";
         ResponseEntity<Project> response = restTemplate.postForEntity(gitMinerUrl, project, Project.class);
 
-        return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
+        if (response.getStatusCode() == HttpStatus.CREATED) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(response.getBody());
+        } else {
+            throw new IllegalStateException("Failed to create project: " + response.getStatusCode());
+        }
     }
 }
 

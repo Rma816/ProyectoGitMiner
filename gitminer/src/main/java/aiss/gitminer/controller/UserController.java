@@ -1,40 +1,31 @@
 package aiss.gitminer.controller;
 
-import aiss.gitminer.service.UserService;
 import aiss.gitminer.model.User;
-import java.util.List;
+import aiss.gitminer.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/gitminer/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userRepository) {
-        this.userService = userRepository;
-    }
-    /**
-     * Obtiene todos los usuarios de gitminer
-     */
-    @GetMapping()
-    public ResponseEntity<List<User>> getUsers() {
-        List<User> users = userService.getUsers();
-        return ResponseEntity.ok(users);
-    }
-    /**
-     * Obtiene un usuario específico desde Gitminer.
-     */
-    @GetMapping("/{userId}")
-    public ResponseEntity<User> getUser(@PathVariable String userId) {
-        User user = userService.getUser(userId);
-        return ResponseEntity.ok(user);
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    @PostMapping()
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        userService.createUser(user);
-        return ResponseEntity.ok(user);
+    @GetMapping
+    public ResponseEntity<List<User>> findAll() {
+        return ResponseEntity.ok(userRepository.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> findById(@PathVariable String id) {
+        return userRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

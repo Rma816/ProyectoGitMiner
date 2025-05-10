@@ -1,10 +1,16 @@
+
 package aiss.gitminer.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 @Entity
 @Table(name = "GMUser")     // Watch out: User is a reserved keyword in H2
 public class User {
@@ -21,58 +27,6 @@ public class User {
     private String avatarUrl;
     @JsonProperty("web_url")
     private String webUrl;
-
-    public User(String id, String username, String name, String avatarUrl, String webUrl) {
-        this.id = id;
-        this.username = username;
-        this.name = name;
-        this.avatarUrl = avatarUrl;
-        this.webUrl = webUrl;
-    }
-
-    public User() {
-
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
-
-    public String getWebUrl() {
-        return webUrl;
-    }
-
-    public void setWebUrl(String webUrl) {
-        this.webUrl = webUrl;
-    }
 
     @Override
     public String toString() {

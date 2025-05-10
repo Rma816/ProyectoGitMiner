@@ -1,8 +1,7 @@
 package aiss.gitminer.controller;
 
 import aiss.gitminer.model.Comment;
-import aiss.gitminer.service.CommentService;
-
+import aiss.gitminer.repository.CommentRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,37 +11,22 @@ import java.util.List;
 @RequestMapping("/gitminer/comments")
 public class CommentController {
 
-    private final CommentService commentService;
+    private final CommentRepository commentRepository;
 
-    public CommentController(CommentService commentService) {
-        this.commentService = commentService;
+    public CommentController(CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
     }
 
-    /**
-     * Obtiene los comentarios de un issue específico desde Gitminer, sin transformación.
-     */
-    @GetMapping()
-    public ResponseEntity<List<Comment>> getComments() {
-        List<Comment> comments = commentService.getComments();
-        return ResponseEntity.ok(comments);
-    }
-    /**
-     * Obtiene un comentario específico desde Gitminer.
-     */
-    @GetMapping("/{commentId}")
-    public ResponseEntity<Comment> getComment(@PathVariable String commentId) {
-        Comment comment = commentService.getComment(commentId);
-        return ResponseEntity.ok(comment);
+    @GetMapping
+    public ResponseEntity<List<Comment>> findAll() {
+        return ResponseEntity.ok(commentRepository.findAll());
     }
 
-    /**
-     * Función para crear Comments
-     */
-
-    @PostMapping()
-    public ResponseEntity<List<Comment>> createComments(@RequestBody List<Comment> comments) {
-        commentService.createComments(comments);
-        return ResponseEntity.ok(comments);
+    @GetMapping("/{id}")
+    public ResponseEntity<Comment> findById(@PathVariable String id) {
+        System.out.println("CommentId: " + id);
+        return commentRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
-

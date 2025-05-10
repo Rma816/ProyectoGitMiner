@@ -1,12 +1,12 @@
 package aiss.githubminer.transformer;
 
 import aiss.githubminer.model.CommentGHM;
-import aiss.githubminer.model.GitMiner.Comment;
 import aiss.githubminer.model.IssueGHM;
-import aiss.githubminer.model.GitMiner.Issue;
 import aiss.githubminer.model.issueD.IssueLabel;
 
 import aiss.githubminer.service.CommentService;
+import aiss.gitminer.model.Comment;
+import aiss.gitminer.model.Issue;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

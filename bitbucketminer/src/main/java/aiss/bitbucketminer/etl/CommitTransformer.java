@@ -2,7 +2,7 @@ package aiss.bitbucketminer.etl;
 
 import aiss.bitbucketminer.model.BitBucketCommit;
 import aiss.bitbucketminer.model.dependencies.Pair;
-import aiss.bitbucketminer.model.GitMiner.Commit;
+import aiss.gitminer.model.Commit;
 
 
 public class CommitTransformer {
@@ -10,12 +10,12 @@ public class CommitTransformer {
     public static Commit transformCommit(BitBucketCommit commit) {
         Commit newCommit = new Commit();
         newCommit.setId(commit.getId());
-        newCommit.setMessage(commit.getMessage());
-        newCommit.setTitle(commit.getTitle());
-        newCommit.setAuthorName(commit.getAuthor_name());
-        newCommit.setAuthorEmail(commit.getAuthor_email());
-        newCommit.setAuthoredDate(commit.getAuthored_date());
-        newCommit.setWebUrl(commit.getWeb_url());
+        newCommit.setMessage(commit.getMessage() != null ? commit.getMessage() : "No message");
+        newCommit.setTitle(commit.getTitle() != null ? commit.getTitle() : "No title");
+        newCommit.setAuthorName(commit.getAuthor_name() != null ? commit.getAuthor_name() : "No author name");
+        newCommit.setAuthorEmail(commit.getAuthor_email() != null ? commit.getAuthor_email() : "No author email");
+        newCommit.setAuthoredDate(commit.getAuthored_date() != null ? commit.getAuthored_date() : "No authored date");
+        newCommit.setWebUrl(commit.getWeb_url() != null ? commit.getWeb_url() : "No web url");
         return newCommit;
     }
 

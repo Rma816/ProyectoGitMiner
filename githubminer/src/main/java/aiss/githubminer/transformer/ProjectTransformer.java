@@ -5,9 +5,11 @@ import aiss.githubminer.model.IssueGHM;
 import aiss.githubminer.model.ProjectGHM;
 import aiss.githubminer.service.CommitService;
 import aiss.githubminer.service.IssueService;
+import aiss.gitminer.model.Commit;
+import aiss.gitminer.model.Issue;
+import aiss.gitminer.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import aiss.githubminer.model.GitMiner.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

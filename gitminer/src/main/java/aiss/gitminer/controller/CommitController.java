@@ -1,7 +1,7 @@
 package aiss.gitminer.controller;
 
-import aiss.gitminer.service.CommitService;
 import aiss.gitminer.model.Commit;
+import aiss.gitminer.repository.CommitRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,35 +11,21 @@ import java.util.List;
 @RequestMapping("/gitminer/commits")
 public class CommitController {
 
-    private final CommitService commitService;
+    private final CommitRepository commitRepository;
 
-    public CommitController(CommitService commitService) {
-        this.commitService = commitService;
-    }
-    /**
-     * Obtiene todos los commits de gitminer
-     */
-    @GetMapping()
-    public ResponseEntity<List<Commit>> getCommits() {
-        List<Commit> commits = commitService.getCommits();
-        return ResponseEntity.ok(commits);
-    }
-    /**
-     * Obtiene un commit específico desde Gitminer.
-     */
-    @GetMapping("/{commitId}")
-    public ResponseEntity<Commit> getCommit(@PathVariable String commitId) {
-        Commit commit = commitService.getCommit(commitId);
-        return ResponseEntity.ok(commit);
+    public CommitController(CommitRepository commitRepository) {
+        this.commitRepository = commitRepository;
     }
 
-    /**
-     * Función para crear commits
-     */
+    @GetMapping
+    public ResponseEntity<List<Commit>> findAll() {
+        return ResponseEntity.ok(commitRepository.findAll());
+    }
 
-    @PostMapping()
-    public ResponseEntity<List<Commit>> createCommits(@RequestBody List<Commit> commits) {
-        commitService.createCommits(commits);
-        return ResponseEntity.ok(commits);
+    @GetMapping("/{id}")
+    public ResponseEntity<Commit> findById(@PathVariable String id) {
+        return commitRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

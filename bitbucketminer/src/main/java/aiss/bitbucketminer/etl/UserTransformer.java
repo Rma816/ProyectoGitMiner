@@ -1,7 +1,7 @@
 package aiss.bitbucketminer.etl;
 
 import aiss.bitbucketminer.model.BitBucketUser;
-import aiss.bitbucketminer.model.GitMiner.User;
+import aiss.gitminer.model.User;
 
 public class UserTransformer {
 
@@ -10,11 +10,11 @@ public class UserTransformer {
             return null;
         }
         User newUser = new User();
-        newUser.setId(user.getId());
-        newUser.setName(user.getName());
-        newUser.setUsername(user.getUsername());
-        newUser.setAvatarUrl(user.getAvatar_url());
-        newUser.setWebUrl(user.getWeb_url());
+        newUser.setId(user.getId() != null ? user.getId() : "No user id");
+        newUser.setName(user.getName() != null ? user.getName() : "No user name");
+        newUser.setUsername(user.getUsername() != null ? user.getUsername() : "No user username");
+        newUser.setAvatarUrl(user.getAvatar_url() != null ? user.getAvatar_url() : "No user avatar url");
+        newUser.setWebUrl(user.getWeb_url() != null ? user.getWeb_url() : "No user web url");
         return newUser;
     }
 }

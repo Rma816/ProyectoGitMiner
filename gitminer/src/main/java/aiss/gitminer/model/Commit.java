@@ -1,10 +1,14 @@
 package aiss.gitminer.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 @Entity
 @Table(name = "Commit")
 public class Commit {
@@ -14,6 +18,11 @@ public class Commit {
     private String id;
     @JsonProperty("title")
     private String title;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    @JsonBackReference
+    private Project project;
 
     @JsonProperty("message")
     @Column(columnDefinition="TEXT")
@@ -27,80 +36,9 @@ public class Commit {
     @NotEmpty(message = "Author date cannot be empty.")
     private String authoredDate;
 
-    public Commit(String id, String title, String message, String authorName, String authorEmail, String authoredDate, String webUrl) {
-        this.id = id;
-        this.title = title;
-        this.message = message;
-        this.authorName = authorName;
-        this.authorEmail = authorEmail;
-        this.authoredDate = authoredDate;
-        this.webUrl = webUrl;
-    }
-
-    public Commit() {
-    }
-
     @JsonProperty("web_url")
-    @NotEmpty(message = "URL cannot be empty." +
-            "")
-
+    @NotEmpty(message = "URL cannot be empty.")
     private String webUrl;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
-    public String getAuthorEmail() {
-        return authorEmail;
-    }
-
-    public void setAuthorEmail(String authorEmail) {
-        this.authorEmail = authorEmail;
-    }
-
-    public String getAuthoredDate() {
-        return authoredDate;
-    }
-
-    public void setAuthoredDate(String authoredDate) {
-        this.authoredDate = authoredDate;
-    }
-
-    public String getWebUrl() {
-        return webUrl;
-    }
-
-    public void setWebUrl(String webUrl) {
-        this.webUrl = webUrl;
-    }
 
     @Override
     public String toString() {

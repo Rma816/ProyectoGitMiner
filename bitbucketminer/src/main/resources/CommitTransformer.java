@@ -1,7 +1,6 @@
 package aiss.bitbucketminer.etl;
 
 import aiss.bitbucketminer.model.BitBucketCommit;
-import aiss.gitminer.model.Commit;
 import aiss.bitbucketminer.model.dependencies.Pair;
 
 import java.util.regex.Matcher;
