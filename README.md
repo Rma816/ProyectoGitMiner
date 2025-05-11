@@ -43,7 +43,7 @@ Lanza cada servicio de forma individual, asegurándote de que cada uno escuche e
 - **BitbucketMiner**: http://localhost:8081
 
 ## Uso
-### 1. GitHubMiner
+### GitHubMiner
 GitHubMiner tiene disponible las siguientes operaciones:
 - Obtener los datos extraídos de GitHub, parseados en formato de salida de GitMiner:
 
@@ -59,7 +59,7 @@ Por ejemplo, para ambas operaciones serviría la url:
 
     http://localhost:8082/github/spring-projects/spring-framework?sinceCommits=1&sinceIssues=1&maxPages=1
 
-## 2. BitbucketMiner
+## BitbucketMiner
 BitbucketMiner tiene disponible las siguientes operaciones:
 
 - Obtener los datos extraídos de GitHub, transformados en formato de salida de GitMiner:
@@ -76,7 +76,7 @@ Por ejemplo, para ambas operaciones seriría la siguiente url:
 
     http://localhost:8081/bitbucket/gentlero/bitbucket-api?nCommits=5&nIssues=5&maxPages=2
 
-### 3. GitMiner
+### GitMiner
 Este servicio expone los datos almacenados a través de una API REST, utilizando una base de datos H2 interna.
 
 Operaciones disponibles:
@@ -136,8 +136,8 @@ La información de cada API se ha obtenido a partir de su documentación:
 
 ## Autores
 
-- Adrián Muñoz Aradilla: 
-- Miguel Cuesta Sánchez:
+- Adrián Muñoz Aradilla: adrmunara@alum.us.es 
+- Miguel Cuesta Sánchez: migcuesan@alum.us.es 
 - Rocío Morato Aguilar: rocmoragu@alum.us.es
-- Raúl:
+- Raúl Romero Carmona: rauromcar1@alum.us.es 
 
