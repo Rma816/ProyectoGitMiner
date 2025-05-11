@@ -30,7 +30,7 @@ El proyecto se compone de tres servicios independientes:
 
 ### 2. Accede al directorio del proyecto:
     
-       cd ProyectoGitMiner
+    cd ProyectoGitMiner
 
 ### 3. Abre los tres servicios en tu entorno de desarrollo
 
@@ -121,7 +121,6 @@ Todo esto desde a través de su uri base:
 
     http://localhost:8080/gitminer/
 
-
 ## Pruebas con Postman
 
 Puedes probar todas las operaciones usando la colección Postman incluida en el proyecto. Para ello:
@@ -130,9 +129,15 @@ Puedes probar todas las operaciones usando la colección Postman incluida en el 
 2. Ajusta las variables si es necesario (host, puertos)
 3. Ejecuta las pruebas para verificar el funcionamiento completo del sistema.
 
+## Bibliografía
+La información de cada API se ha obtenido a partir de su documentación:
+- BitbucketMiner: https://developer.atlassian.com/cloud/bitbucket/rest/api-group-reports/#api-repositories-workspace-repo-slug-commit-commit-reports-reportid-put
+- GitHubMiner: https://docs.github.com/en/rest?apiVersion=2022-11-28
+
 ## Autores
 
 - Adrián Muñoz Aradilla: 
 - Miguel Cuesta Sánchez:
 - Rocío Morato Aguilar: rocmoragu@alum.us.es
 - Raúl:
+
